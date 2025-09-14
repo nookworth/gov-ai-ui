@@ -108,34 +108,21 @@ export const Chat = ({
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Select a bill to begin chatting!</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-          <Badge
-            variant="neutral"
-            className={`w-fit justify-start h-fit ${
-              selectedBill ? "" : "invisible"
-            }`}
-          >
+        {selectedBill ? (
+          <Badge className="w-full justify-start h-fit bg-chart-2 text-white">
             <div className="flex flex-col items-start">
               <span className="font-semibold text-xs">
                 {selectedBill?.billNumber.toUpperCase()}
               </span>
-              <span className="text-xs opacity-70">{selectedBill?.title}</span>
+              <span className="text-xs">{selectedBill?.title}</span>
             </div>
           </Badge>
-
-        <ScrollArea className="min-h-[200px] max-h-[400px] space-y-4 p-2 overflow-scroll">
-          <Button
-            className={`cursor-pointer w-fit my-2 ${
-              selectedBill ? "" : "invisible"
-            }`}
-            disabled={!selectedBill}
-            onClick={handleQuickQuestion}
-          >
-            What concerns relative to the separation of church and state are
-            present in this bill?
-          </Button>
+        ) : (
+          <CardTitle>Select a bill to begin chatting!</CardTitle>
+        )}
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <ScrollArea className={`min-h-[200px] max-h-[400px] space-y-4 p-2 overflow-y-scroll ${messages?.length ? "" : "invisible"}`}>
           {messages.map((message) => (
             <div
               key={message.id}
@@ -171,23 +158,29 @@ export const Chat = ({
           )}
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex-col gap-2">
+      <CardFooter className="flex flex-col gap-2">
+        <form onSubmit={handleInputSubmit} className="w-full flex gap-2">
+          <Input
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Ask a question about this bill..."
+            disabled={chatResponseLoading}
+            className="flex-1"
+          />
+          <Button
+            type="submit"
+            disabled={!selectedBill || chatResponseLoading || !userInput.trim()}
+          >
+            Send
+          </Button>
+        </form>
         {selectedBill && (
-          <form onSubmit={handleInputSubmit} className="w-full flex gap-2">
-            <Input
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Ask a question about this bill..."
-              disabled={chatResponseLoading}
-              className="flex-1"
-            />
-            <Button
-              type="submit"
-              disabled={chatResponseLoading || !userInput.trim()}
-            >
-              Send
-            </Button>
-          </form>
+          <Button
+            className="cursor-pointer w-fit block"
+            onClick={handleQuickQuestion}
+          >
+            Ask about separation of church and state
+          </Button>
         )}
       </CardFooter>
     </Card>
