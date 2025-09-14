@@ -8,7 +8,10 @@ const URL =
   "https://us-west-2.data.tidbcloud.com/api/v1beta/app/dataapp-raHlDywv/endpoint/available_bills";
 
 type Bill = {
-  meta: { bill_id: number; bill_number: string; source: string; title: string };
+  bill_id: string;
+  bill_number: string;
+  source: string;
+  title: string;
 };
 
 type SelectedBill = {
@@ -51,10 +54,7 @@ export const BillList = ({
         const data = await response.json();
         const rows = data?.data?.rows;
         if (rows) {
-          const parsedBills = rows.map(({ meta }: { meta: string }) => ({
-            meta: JSON.parse(meta),
-          }));
-          setAvailableBills(parsedBills);
+          setAvailableBills(rows);
         }
       } catch (error) {
         console.error("Error fetching bills:", error);
@@ -78,16 +78,16 @@ export const BillList = ({
 
   return (
     <div className="space-x-2 space-y-2">
-      {availableBills.map(({ meta }) => (
+      {availableBills.map((bill) => (
         <Button
-          key={meta.bill_id}
+          key={bill.bill_id}
           className="cursor-pointer w-fit h-fit"
-          disabled={meta.bill_id === selectedBill?.billId || chatResponseLoading}
-          onClick={() => onClick(meta.bill_id, meta.bill_number, meta.title)}
+          disabled={parseInt(bill.bill_id) === selectedBill?.billId || chatResponseLoading}
+          onClick={() => onClick(parseInt(bill.bill_id), bill.bill_number, bill.title)}
         >
           <div className="text-left">
-            <div className="">{meta.bill_number.toUpperCase()}</div>
-            <div className="">{meta.title}</div>
+            <div className="">{bill.bill_number.toUpperCase()}</div>
+            <div className="">{bill.title}</div>
           </div>
         </Button>
       ))}
