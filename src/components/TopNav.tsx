@@ -16,7 +16,7 @@ export const TopNav = () => {
     <div className="w-full flex max-md:flex-col justify-start gap-8 border-y-2 border-border py-4 px-8 bg-chart-2">
       <Select>
         <SelectTrigger className="min-w-45 w-fit">
-          <SelectValue placeholder="Utah" />
+          <SelectValue placeholder="State" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -29,7 +29,7 @@ export const TopNav = () => {
       </Select>
       <Select>
         <SelectTrigger className="min-w-45 w-fit">
-          <SelectValue placeholder="2025 General Session" />
+          <SelectValue placeholder="Session" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
