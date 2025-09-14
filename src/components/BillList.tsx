@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const PUBLIC_KEY = import.meta.env.VITE_TIDB_DATAAPP_PUBLIC_KEY;
 const PRIVATE_KEY = import.meta.env.VITE_TIDB_DATAAPP_PRIVATE_KEY;
@@ -10,8 +11,23 @@ type Bill = {
   meta: { bill_id: number; bill_number: string; source: string; title: string };
 };
 
-export const BillList = ({ onClick }: { onClick: (billId: number) => void }) => {
+type SelectedBill = {
+  billId: number;
+  billNumber: string;
+  title: string;
+};
+
+export const BillList = ({
+  chatResponseLoading,
+  onClick,
+  selectedBill,
+}: {
+  chatResponseLoading: boolean;
+  onClick: (billId: number, billNumber: string, title: string) => void;
+  selectedBill: SelectedBill | null;
+}) => {
   const [availableBills, setAvailableBills] = useState<Bill[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBills = async () => {
@@ -42,23 +58,36 @@ export const BillList = ({ onClick }: { onClick: (billId: number) => void }) => 
         }
       } catch (error) {
         console.error("Error fetching bills:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchBills();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="space-x-2 space-y-2">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <Skeleton key={index} className="w-64 h-16" />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="space-x-2 space-y-2">
       {availableBills.map(({ meta }) => (
-        <Button key={meta.bill_id} className="cursor-pointer w-fit h-fit" onClick={() => onClick(meta.bill_id)}>
+        <Button
+          key={meta.bill_id}
+          className="cursor-pointer w-fit h-fit"
+          disabled={meta.bill_id === selectedBill?.billId || chatResponseLoading}
+          onClick={() => onClick(meta.bill_id, meta.bill_number, meta.title)}
+        >
           <div className="text-left">
-            <div className="">
-              {meta.bill_number.toUpperCase()}
-            </div>
-            <div className="">
-              {meta.title}
-            </div>
+            <div className="">{meta.bill_number.toUpperCase()}</div>
+            <div className="">{meta.title}</div>
           </div>
         </Button>
       ))}
