@@ -10,7 +10,7 @@ type Bill = {
   meta: { bill_id: number; bill_number: string; source: string; title: string };
 };
 
-export const BillList = () => {
+export const BillList = ({ onClick }: { onClick: (billId: number) => void }) => {
   const [availableBills, setAvailableBills] = useState<Bill[]>([]);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const BillList = () => {
   return (
     <div className="space-x-2 space-y-2">
       {availableBills.map(({ meta }) => (
-        <Button key={meta.bill_id} className="cursor-pointer w-fit h-fit">
+        <Button key={meta.bill_id} className="cursor-pointer w-fit h-fit" onClick={() => onClick(meta.bill_id)}>
           <div className="text-left">
             <div className="">
               {meta.bill_number.toUpperCase()}
