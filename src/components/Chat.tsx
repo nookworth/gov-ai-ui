@@ -11,7 +11,7 @@ import {
 import { Input } from "./ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const BASE_URL = import.meta.env.DEV ? "http://0.0.0.0:3000" : "";
+const BASE_URL = import.meta.env.DEV ? "http://0.0.0.0:3000" : "https://gov-ai-agent.fly.dev";
 
 type SelectedBill = {
   billId: number;
