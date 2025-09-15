@@ -13,7 +13,7 @@ const STATES = ["UT"];
 
 export const TopNav = () => {
   return (
-    <div className="w-full flex justify-start gap-8 border-y-2 border-border py-4 px-8 bg-chart-2">
+    <div className="w-full flex justify-start gap-8 border-y-2 border-border py-4 px-8 bg-secondary-background/60">
       <Select>
         <SelectTrigger className="md:min-w-45 w-fit">
           <SelectValue placeholder="State" />

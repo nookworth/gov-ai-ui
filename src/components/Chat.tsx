@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -108,21 +107,15 @@ export const Chat = ({
   };
 
   return (
-    <Card className="w-full max-w-full flex flex-col max-h-[75vh]">
+    <Card className="w-full max-w-full flex flex-col max-h-[75vh] bg-secondary-background/60">
       <CardHeader>
         {selectedBill ? (
-          <Badge className="justify-start h-fit bg-chart-2 text-white">
-            <div className="flex flex-col items-start">
-              <span className="font-semibold text-xs">
-                {selectedBill?.billNumber.toUpperCase()}
-              </span>
-              <span className="text-xs">{selectedBill?.title}</span>
-            </div>
-          </Badge>
+          <CardTitle className="text-center">Chatting about {selectedBill.billNumber.toUpperCase()}</CardTitle>
         ) : (
-          <CardTitle>Select a bill to begin chatting!</CardTitle>
+          <CardTitle className="text-center">Select a bill to begin chatting!</CardTitle>
         )}
       </CardHeader>
+      <div className="border-border border-1 -mt-1.5" />
       <CardContent className="space-y-4 overflow-y-scroll h-full">
         <ScrollArea
           className={`space-y-4 p-2 ${messages?.length ? "" : "invisible"}`}
@@ -137,8 +130,8 @@ export const Chat = ({
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
                   message.role === "user"
-                    ? "bg-main text-main-foreground"
-                    : "bg-secondary-background text-foreground"
+                    ? "bg-overlay/80 text-secondary-background"
+                    : "bg-overlay/80 text-secondary-background"
                 }`}
               >
                 <div className="text-sm whitespace-pre-wrap">
