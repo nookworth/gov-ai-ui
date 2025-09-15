@@ -11,7 +11,9 @@ import {
 import { Input } from "./ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const BASE_URL = import.meta.env.DEV ? "http://0.0.0.0:3000" : "https://gov-ai-agent.fly.dev";
+const BASE_URL = import.meta.env.DEV
+  ? "http://0.0.0.0:3000"
+  : "https://gov-ai-agent.fly.dev";
 
 type SelectedBill = {
   billId: number;
@@ -106,10 +108,10 @@ export const Chat = ({
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full max-w-full flex flex-col max-h-[75vh]">
       <CardHeader>
         {selectedBill ? (
-          <Badge className="w-full justify-start h-fit bg-chart-2 text-white">
+          <Badge className="justify-start h-fit bg-chart-2 text-white">
             <div className="flex flex-col items-start">
               <span className="font-semibold text-xs">
                 {selectedBill?.billNumber.toUpperCase()}
@@ -121,8 +123,10 @@ export const Chat = ({
           <CardTitle>Select a bill to begin chatting!</CardTitle>
         )}
       </CardHeader>
-      <CardContent className="space-y-4">
-        <ScrollArea className={`min-h-[200px] max-h-[400px] space-y-4 p-2 overflow-y-scroll ${messages?.length ? "" : "invisible"}`}>
+      <CardContent className="space-y-4 overflow-y-scroll h-full">
+        <ScrollArea
+          className={`space-y-4 p-2 ${messages?.length ? "" : "invisible"}`}
+        >
           {messages.map((message) => (
             <div
               key={message.id}
@@ -158,7 +162,7 @@ export const Chat = ({
           )}
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex flex-col gap-2">
+      <CardFooter className="flex flex-col gap-2 justify-self-end">
         <form onSubmit={handleInputSubmit} className="w-full flex gap-2">
           <Input
             value={userInput}

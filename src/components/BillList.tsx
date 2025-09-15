@@ -67,25 +67,31 @@ export const BillList = ({
   }, []);
 
   if (isLoading) {
+    const widths = ["w-3/4", "w-1/2", "w-5/6", "w-2/3", "w-3/5", "w-4/5"];
     return (
-      <div className="space-x-2 space-y-2">
+      <div className="space-x-2 space-y-2 overflow-y-scroll max-h-[75vh] h-full">
         {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="w-64 h-16" />
+          <Skeleton key={index} className={`${widths[index]} h-16`} />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="space-x-2 space-y-2">
+    <div className="space-x-2 space-y-2 overflow-y-scroll max-h-[75vh] h-full">
       {availableBills.map((bill) => (
         <Button
           key={bill.bill_id}
-          className="cursor-pointer w-fit h-fit"
-          disabled={parseInt(bill.bill_id) === selectedBill?.billId || chatResponseLoading}
-          onClick={() => onClick(parseInt(bill.bill_id), bill.bill_number, bill.title)}
+          className="cursor-pointer max-w-full h-fit"
+          disabled={
+            parseInt(bill.bill_id) === selectedBill?.billId ||
+            chatResponseLoading
+          }
+          onClick={() =>
+            onClick(parseInt(bill.bill_id), bill.bill_number, bill.title)
+          }
         >
-          <div className="text-left">
+          <div className="text-left text-wrap max-lg:text-xs">
             <div className="">{bill.bill_number.toUpperCase()}</div>
             <div className="">{bill.title}</div>
           </div>
