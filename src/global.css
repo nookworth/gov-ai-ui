@@ -19,6 +19,8 @@
   --chart-4: #00D696;
   --chart-5: #7A83FF;
   --chart-active-dot: #000;
+  --rose-taupe: #795C5F;
+  --licorice: #1E000E;
 }
 
 .dark {
@@ -52,6 +54,8 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-rose-taupe: var(--rose-taupe);
+  --color-licorice: var(--licorice);
 
   --spacing-boxShadowX: 2px;
   --spacing-boxShadowY: 2px;

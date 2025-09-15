@@ -16,7 +16,7 @@ export const TopNav = () => {
     <div className="w-full flex justify-start gap-8 border-y-2 border-border py-4 px-8 bg-secondary-background/60">
       <Select>
         <SelectTrigger className="md:min-w-45 w-fit">
-          <SelectValue placeholder="State" />
+          <SelectValue placeholder="UT" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -29,11 +29,11 @@ export const TopNav = () => {
       </Select>
       <Select>
         <SelectTrigger className="md:min-w-45 w-fit">
-          <SelectValue placeholder="Session" />
+          <SelectValue placeholder="2025 General Session" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>State</SelectLabel>
+            <SelectLabel>Session</SelectLabel>
             {SESSIONS.map((state) => {
               return <SelectItem value={state}>{state}</SelectItem>;
             })}

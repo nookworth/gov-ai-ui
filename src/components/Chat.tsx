@@ -110,9 +110,13 @@ export const Chat = ({
     <Card className="w-full max-w-full flex flex-col max-h-[75vh] bg-secondary-background/60">
       <CardHeader>
         {selectedBill ? (
-          <CardTitle className="text-center">Chatting about {selectedBill.billNumber.toUpperCase()}</CardTitle>
+          <CardTitle className="text-center">
+            Chatting about {selectedBill.billNumber.toUpperCase()}
+          </CardTitle>
         ) : (
-          <CardTitle className="text-center">Select a bill to begin chatting!</CardTitle>
+          <CardTitle className="text-center">
+            Select a bill to begin chatting!
+          </CardTitle>
         )}
       </CardHeader>
       <div className="border-border border-1 -mt-1.5" />
@@ -130,8 +134,8 @@ export const Chat = ({
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
                   message.role === "user"
-                    ? "bg-overlay/80 text-secondary-background"
-                    : "bg-overlay/80 text-secondary-background"
+                    ? "bg-licorice/40 text-secondary-background"
+                    : "bg-licorice/80 text-secondary-background"
                 }`}
               >
                 <div className="text-sm whitespace-pre-wrap">
@@ -165,6 +169,7 @@ export const Chat = ({
             className="flex-1"
           />
           <Button
+            className="cursor-pointer"
             type="submit"
             disabled={!selectedBill || chatResponseLoading || !userInput.trim()}
           >

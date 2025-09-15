@@ -69,7 +69,7 @@ export const BillList = ({
   if (isLoading) {
     const widths = ["w-3/4", "w-1/2", "w-5/6", "w-2/3", "w-3/5", "w-4/5"];
     return (
-      <div className="space-x-2 space-y-2 overflow-y-scroll max-h-[75vh] h-full">
+      <div className="space-x-2 space-y-2 max-lg:overflow-y-scroll max-h-[75vh] h-full">
         {Array.from({ length: 6 }).map((_, index) => (
           <Skeleton key={index} className={`${widths[index]} h-16`} />
         ))}
@@ -78,7 +78,7 @@ export const BillList = ({
   }
 
   return (
-    <div className="space-x-2 space-y-2 overflow-y-scroll max-h-[75vh] h-full">
+    <div className="space-x-2 space-y-2 max-lg:overflow-y-scroll max-h-[75vh] h-full">
       {availableBills.map((bill) => (
         <Button
           key={bill.bill_id}
