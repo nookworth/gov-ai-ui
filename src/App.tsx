@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BillList } from "./components/BillList";
 import { Chat } from "./components/Chat";
+import { Footer } from "./components/Footer";
 import { TopNav } from "./components/TopNav";
 
 type SelectedBill = {
@@ -35,6 +36,7 @@ function App() {
           setChatResponseLoading={setLoading}
         />
       </section>
+      <Footer />
     </div>
   );
 }
