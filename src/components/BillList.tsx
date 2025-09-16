@@ -79,6 +79,7 @@ export const BillList = ({
 
   return (
     <div className="space-x-2 space-y-2 max-lg:overflow-y-scroll max-h-[75vh] h-full">
+      <p className="md:hidden text-center">Select a bill then scroll down to chat</p>
       {availableBills.map((bill) => (
         <Button
           key={bill.bill_id}
@@ -92,8 +93,8 @@ export const BillList = ({
           }
         >
           <div className="text-left text-wrap max-lg:text-xs">
-            <div className="">{bill.bill_number.toUpperCase()}</div>
-            <div className="">{bill.title}</div>
+            <div className="font-bold underline">{bill.bill_number.toUpperCase()}</div>
+            <div>{bill.title}</div>
           </div>
         </Button>
       ))}
